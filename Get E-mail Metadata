@@ -1,0 +1,8 @@
+import email, email.policy
+
+with open('sample.eml', "rb") as f:
+    msg = email.message_from_bytes(f.read(), policy = email.policy.SMTPUTF8)
+
+print("Massage from:", msg['from'])
+print("Massage Date:", msg.get('date'))
+print("Message subject:", msg['subject'])
