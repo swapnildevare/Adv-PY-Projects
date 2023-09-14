@@ -1,0 +1,8 @@
+import pikepdf
+
+pdf_file = 'sample.pdf'
+pdf = pikepdf.Pdf.open(pdf_file)
+docinfo = pdf.docinfo
+
+for key, value in docinfo.items():
+    print(key, ":", value)
