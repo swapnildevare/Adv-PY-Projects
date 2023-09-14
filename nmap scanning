@@ -1,0 +1,6 @@
+
+# With this we can perform nmpa scanning
+import nmap as nm
+
+nm = nm.PortScanner()
+print(nm.scan('127.0.0.1', '21-443'))
