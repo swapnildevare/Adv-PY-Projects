@@ -1,0 +1,23 @@
+
+# with we can collect details of downloaded mp3 file
+import mutagen
+
+def handle_id3(id3_file):
+	id3_frames={'TIT2':'Title','TPE1':'Artist','TALB':'Album','TXXX':'Custom','TCON':'Content Type','TDRL':'Date released','TDRC':'Recording date'}
+	print("{:15} | {:15} | {:38} | {}".format("Frame","Description","Text","Value"))
+	print("_" * 85)
+	
+	for frames in id3_file.tags.values():
+		frame_name=id3_frames.get(frames.FrameID,frames.FrameID)
+		desc=getattr(frames,'desc',"N/A")
+		text=getattr(frames,'text',["N/A"])[0]
+		value=getattr(frames,'value',"N/A")
+	
+		if "date" in frame_name.lower():
+			text=str(text)
+		print("{:15} | {:15} | {:38} | {}".format(frame_name,desc,text,value)) 
+	
+file_path='/home/kali/Downloads/Zinda Banda - Jawan 128 Kbps.mp3'
+av_file=mutagen.File(file_path)
+handle_id3(av_file)
+
