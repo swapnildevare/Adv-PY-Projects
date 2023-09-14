@@ -1,0 +1,25 @@
+from PIL import Image
+from PIL.ExifTags import TAGS
+import sys
+
+f_path = 'mustang.jpeg'
+image_file = Image.open(f_path)
+exif_data = image_file._getexif()
+
+if exif_data is None:
+    print("No EXIF data found")
+    sys.exit()
+
+print("\n Information Regarding Image")
+print("Tag name\tname\tvalue")
+
+for name, value in exif_data.items():
+    gps_tag = TAGS.get(name, name)
+    print(gps_tag,"\t",name,"\t",value)
+
+    if gps_tag != 'GPSInfo':
+        continue
+
+    print(type(value))
+    print(name, value)
+    print("\n Now continue with other value\n\n")
